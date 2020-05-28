@@ -40,6 +40,7 @@ namespace Best_Restaurants.Controllers
     {
       Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
       thisRestaurant.Cuisine = _db.Cuisines.FirstOrDefault(cuisine => cuisine.CuisineId == thisRestaurant.CuisineId);
+      thisRestaurant.Reviews = _db.Reviews.Where(review => review.RestaurantId == id).ToList();
       return View(thisRestaurant);
     }
 

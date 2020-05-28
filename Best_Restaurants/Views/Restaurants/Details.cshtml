@@ -3,6 +3,7 @@
 }
 
 @model Best_Restaurants.Models.Restaurant
+@using Best_Restaurants.Models
 
 <h2>Restaurant Details</h2>
 <p>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId })</p>
@@ -12,6 +13,16 @@
 <h3>@Html.DisplayNameFor(model => model.City): @Html.DisplayFor(model => model.City)<h3>
 <h3>@Html.DisplayNameFor(model => model.Cuisine.Name): @Html.DisplayFor(model => model.Cuisine.Name)<h3>
 
+@if (@Model.Reviews.Count == 0)
+{
+  <p>no reviews yet</p>
+}
+<ul>
+@foreach (Review review in @Model.Reviews)
+{
+  <li>@review.Description</li>
+}
+</ul>
 
 <p>@Html.ActionLink("Delete this Restaurant", "Delete", new { id = Model.RestaurantId })</p>
 <p>@Html.ActionLink("Back to list", "Details", "Cuisines", new { id = Model.CuisineId })</p>
