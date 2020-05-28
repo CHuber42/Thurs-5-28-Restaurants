@@ -39,6 +39,7 @@ namespace Best_Restaurants.Controllers
     public ActionResult Details(int id)
     {
       Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
+      thisRestaurant.Cuisine = _db.Cuisines.FirstOrDefault(cuisine => cuisine.CuisineId == thisRestaurant.CuisineId);
       return View(thisRestaurant);
     }
 
@@ -55,7 +56,7 @@ namespace Best_Restaurants.Controllers
     {
       _db.Entry(restaurant).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new { id = restaurant.RestaurantId });
     }
 
     public ActionResult Delete(int id)
@@ -70,7 +71,7 @@ namespace Best_Restaurants.Controllers
       var thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
       _db.Restaurants.Remove(thisRestaurant);
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", "Cuisines", new { id = thisRestaurant.CuisineId });
     }
   }
 }
