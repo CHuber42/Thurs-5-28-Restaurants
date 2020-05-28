@@ -5,6 +5,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+using System;
+
 
 namespace Best_Restaurants.Controllers
 {
@@ -39,6 +41,7 @@ namespace Best_Restaurants.Controllers
     public ActionResult Details(int id)
     {
       Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(cuisine => cuisine.CuisineId == id);
+      thisCuisine.Restaurants = _db.Restaurants.Where(restaurant => restaurant.CuisineId == id).ToList(); ;
       return View("Details", thisCuisine);
     }
 
