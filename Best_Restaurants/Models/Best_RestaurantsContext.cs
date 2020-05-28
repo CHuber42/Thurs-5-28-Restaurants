@@ -9,9 +9,9 @@ namespace Best_Restaurants.Models
     public virtual DbSet<Cuisine> Cuisines { get; set; }
     public DbSet<Restaurant> Restaurants { get; set; }
 
+    public Best_RestaurantsContext(DbContextOptions options) : base(options) { }
     // public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 
-    public Best_RestaurantsContext(DbContextOptions options) : base(options) { }
 
     //   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //   {
